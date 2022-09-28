@@ -1,1 +1,1 @@
-Dashboard displaying brent and wti front month close values. Done in exercise to learn Dash
+Dashboard displaying brent/wti front month close values scraped from MarketWatch website. Done in exercise to learn Dash
