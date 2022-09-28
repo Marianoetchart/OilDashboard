@@ -6,8 +6,24 @@ from dash.dependencies import Input, Output
 
 app = Dash(__name__)
 
-df_wti = pd.read_csv("C:\\Users\\maria\\Documents\\VSCodeProjects\\Oil Dashboard\\FUTURE_US_XNYM_CL.csv")
-df_brent = pd.read_csv("C:\\Users\\maria\\Documents\\VSCodeProjects\\Oil Dashboard\\FUTURE_UK_IFEU_BRN.1.csv")
+start_date = "09/15/2021%2000:00:00"
+end_date = "09/27/2022%2023:59:59"
+date_range = "d30"
+freq = "p1d"
+
+url = "https://www.marketwatch.com/investing/future/{}/downloaddatapartial?startdate={}&enddate={}&daterange={}&frequency={}&csvdownload=true&downloadpartial=false&newdates=false".format(
+    '{key}',
+    start_date, 
+    end_date,
+    date_range,
+    freq
+)
+
+wti_url = url.format(key = "cl.1")
+brent_url = url.format(key = "brn.1") +  "&countrycode=uk"
+
+df_wti = pd.read_csv(wti_url)
+df_brent = pd.read_csv(brent_url)
 
 app.layout = html.Div(children=[
     html.H1(children='Oil Front Month Dashboard'),
