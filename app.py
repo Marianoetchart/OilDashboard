@@ -20,6 +20,8 @@ url = "https://www.marketwatch.com/investing/future/{}/downloaddatapartial?start
     freq
 )
 
+oil_icon = 'https://cdn-icons-png.flaticon.com/512/1782/1782044.png'
+
 wti_url = url.format(key = "cl.1")
 brent_url = url.format(key = "brn.1") +  "&countrycode=uk"
 
@@ -28,7 +30,8 @@ df_brent = pd.read_csv(brent_url,parse_dates=['Date'] )
 
 app.layout = html.Div(children=[
     
-    html.H1(children='Oil Dashboard'),
+    html.H1(children=['Oil Dashboard',  html.Img(src=oil_icon, style = {'margin-left':'1%','width':"3%",'height':"3%"})]),
+
 
     html.Div(children='''
         Select Crude Oil: 
