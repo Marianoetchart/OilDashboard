@@ -23,23 +23,26 @@ url = "https://www.marketwatch.com/investing/future/{}/downloaddatapartial?start
 wti_url = url.format(key = "cl.1")
 brent_url = url.format(key = "brn.1") +  "&countrycode=uk"
 
-df_wti = pd.read_csv(wti_url)
-df_brent = pd.read_csv(brent_url)
+df_wti = pd.read_csv(wti_url,parse_dates=['Date'])
+df_brent = pd.read_csv(brent_url,parse_dates=['Date'] )
 
 app.layout = html.Div(children=[
-    html.H1(children='Oil Front Month Dashboard'),
+    
+    html.H1(children='Oil Dashboard'),
 
     html.Div(children='''
         Select Crude Oil: 
     '''),
 
+    html.Br(),
+
     dcc.Dropdown(id='dropdown', options=[
             {'label': 'WTI', 'value': 'wti'},
             {'label': 'Brent', 'value': 'brent'}],
-            value = 'brent'),
+            value = 'brent', style={'width': '100%'}),
 
-    dcc.Graph(id='generic-graph')
-])
+    dcc.Graph(id='generic-graph', responsive=True, style={'height': '60vh'}), 
+], style={'margin': '5%'})
 
 
 @app.callback(Output('generic-graph', 'figure'), 
@@ -51,7 +54,7 @@ def update_figure(selected_value):
          x, y = df_brent['Date'], df_brent['Close']
 
     fig = go.Figure([go.Scatter(x = x, y = y,\
-                     line = dict(color = 'firebrick', width = 4), name = 'Front Month Close')
+                     line = dict(color = 'firebrick'), name = 'Front Month Close')
                      ])
     
     fig.update_layout(title = 'Front Month Close Prices',
