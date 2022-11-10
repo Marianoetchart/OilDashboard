@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 from dash.dependencies import Input, Output
 
 app = Dash(__name__)
+server = app.server
 
 start_date = "09/15/2021%2000:00:00"
 end_date = "09/27/2022%2023:59:59"
