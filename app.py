@@ -3,14 +3,15 @@ import plotly.express as px
 import pandas as pd
 import plotly.graph_objects as go
 from dash.dependencies import Input, Output
-
+import datetime 
 app = Dash(__name__)
 app.title = 'Oil DB'
 app._favicon = ("oil_barrel.png")
 server = app.server
 
 start_date = "09/15/2021%2000:00:00"
-end_date = "09/27/2022%2023:59:59"
+today_date = datetime.date.today().strftime('%m/%d/%Y') 
+end_date = "{}%2023:59:59".format(today_date)
 date_range = "d30"
 freq = "p1d"
 
